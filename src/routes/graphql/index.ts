@@ -11,7 +11,7 @@ const plugin: FastifyPluginAsyncJsonSchemaToTs = async (
         body: graphqlBodySchema,
       },
     },
-    async function (request, reply) {}
+    async function (_request, _reply) {}
   );
 };
 
