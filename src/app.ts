@@ -12,6 +12,24 @@ const app: FastifyPluginAsync = async (fastify): Promise<void> => {
     dir: join(__dirname, 'routes'),
     options: {},
   });
+
+  fastify.setErrorHandler((error, _req, res) => {
+      if (error.statusCode) {
+          if (error.statusCode > 400) {
+              _req.log.error(error);
+          }
+
+          res
+              .code(error.statusCode)
+              .send(error);
+      } else {
+          _req.log.error(error);
+
+          res
+              .code(500)
+              .send({ error: 'Internal Server Error' });
+      }
+  });
 };
 
 export default app;

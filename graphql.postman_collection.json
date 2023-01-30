@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "4f4285b0-b01d-4403-93c9-2c802bcc5d31",
+		"name": "RSS GraphQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7012733"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/09f35e2c-e99f-424a-988e-9db3a7a33711",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"09f35e2c-e99f-424a-988e-9db3a7a33711"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Member Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/member-types",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"member-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User John",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"john_id\", pm.response.json().id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"email\": \"js@example.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User John Profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"john_profile_id\", pm.response.json().id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"{{john_id}}\",\n    \"memberTypeId\": \"basic\",\n    \"avatar\": \"John's Avatar\",\n    \"sex\": \"M\",\n    \"city\": \"London\",\n    \"country\": \"UK\",\n    \"street\": \"Downing St. 10\",\n    \"birthday\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User John Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"john_post_id\", pm.response.json().id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"{{john_id}}\",\n    \"title\": \"John's Post\",\n    \"content\": \"Nice content\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User Jane",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"jane_id\", pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jd@example.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let john_id = pm.collectionVariables.get(\"john_id\");",
+							"let jane_id = pm.collectionVariables.get(\"jane_id\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"{{john_id}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/{{jane_id}}/subscribeTo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"{{jane_id}}",
+						"subscribeTo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get GraphQL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($userId: ID, $profileId: ID, $postId: ID, $memberTypeId: ID) {\n    # ### Uncommenting the following lines will cause `Deph limit` error\n    #\n    # users { \n    #     id, \n    #     firstName, \n    #     usersSubscribedTo { \n    #         id, \n    #         firstName, \n    #         usersSubscribedTo { \n    #             id, \n    #             firstName, \n    #             usersSubscribedTo { \n    #                 id, \n    #                 firstName, \n    #                 usersSubscribedTo { \n    #                     id, \n    #                     firstName, \n    #                     usersSubscribedTo { \n    #                         id, \n    #                         firstName \n    #                     }\n    #                 }\n    #             } \n    #         } \n    #     }, \n    #     subscribedToUsers { \n    #         id, \n    #         firstName \n    #     } \n    # }\n    users { id, firstName, email }\n    user(id: $userId) { \n        id, \n        firstName, \n        usersSubscribedTo { \n            id, \n            firstName \n        }, \n        subscribedToUsers { \n            id, \n            firstName \n        } \n    }\n    profiles {\n        id,\n        memberType { id },\n        user { id, firstName }\n    }\n    profile(id: $profileId) { \n        id,\n        memberType { id },\n        user { id, firstName }\n    }\n    memberTypes { id, discount, monthPostsLimit }\n    memberType(id: $memberTypeId) { id, discount }\n    posts { \n        id, \n        title, \n        user { id, email }\n    }\n    post(id: $postId) {\n        id, \n        title\n    }\n}",
+						"variables": "{\n    \"userId\": \"{{john_id}}\",\n    \"profileId\": \"{{john_profile_id}}\",\n    \"postId\": \"{{john_post_id}}\",\n    \"memberTypeId\": \"basic\"\n}"
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "john_id",
+			"value": ""
+		},
+		{
+			"key": "jane_id",
+			"value": ""
+		},
+		{
+			"key": "member_type_id",
+			"value": ""
+		},
+		{
+			"key": "john_profile_id",
+			"value": ""
+		},
+		{
+			"key": "john_post_id",
+			"value": ""
+		}
+	]
+}
