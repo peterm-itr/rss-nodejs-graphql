@@ -13,7 +13,7 @@ export const postType: GraphQLObjectType = new GraphQLObjectType({
             type: userType,
             description: 'Post author',
             resolve: async (source, _args, context, _info) => {
-                return await context.db.posts.findOne({ key: 'id', equals: source.userId });
+                return await context.db.user.findOne({ key: 'id', equals: source.userId });
             }
         },
         title: {

@@ -14,14 +14,14 @@ export const profileType: GraphQLObjectType = new GraphQLObjectType({
             type: userType,
             description: 'Profile owner',
             resolve: async (source, _args, context, _info) => {
-                return await context.db.posts.findOne({ key: 'id', equals: source.userId });
+                return await context.db.users.findOne({ key: 'id', equals: source.userId });
             }
         },
         memberType: {
             type: memberType,
             description: 'Post author',
             resolve: async (source, _args, context, _info) => {
-                return await context.db.profiles.findOne({ key: 'id', equals: source.memberTypeId });
+                return await context.db.memberTypes.findOne({ key: 'id', equals: source.memberTypeId });
             }
         },
         avatar: {
